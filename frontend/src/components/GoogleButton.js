@@ -12,7 +12,7 @@ export function GoogleButton({ text, href }) {
         <nav class="level">
           <div class="level-item has-text-centered">
             <a
-              href=${href}
+              href="/auth/google"
               class="button is-rounded is-link is-inverted is-medium"
             >
               <span class="icon">

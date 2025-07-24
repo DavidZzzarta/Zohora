@@ -56,7 +56,7 @@ function LoginForm() {
   };
   return html`
     <form onSubmit=${handleSubmit}>
-      <${GoogleButton} text="Entrar con Google" href="auth/google" />
+      <${GoogleButton} text="Entrar con Google" />
       <${InputForm}
         type="email"
         placeholder="algun@ejemplo.com"
@@ -125,7 +125,7 @@ function RegistryForm() {
   };
   return html`
     <form onSubmit=${handleSubmit}>
-      <${GoogleButton} text="Registrarse con Google" href="auth/google" />
+      <${GoogleButton} text="Registrarse con Google" />
       <${InputForm}
         name="username"
         type="text"
