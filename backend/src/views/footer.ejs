@@ -1,0 +1,55 @@
+  <footer class="footer">
+    <div class="container is-fullhd">
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div class="content">
+            <h5 class="title is-5">Zohora expense</h5>
+              <p>El código fuente tiene licencia <a href="https://opensource.org/license/mit">MIT</a>.</p>
+              <p>
+                <small id='version'></small>
+              </p>
+          </div>
+        </div>
+      </nav>
+      <hr class="bd-hr">
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <a href='/information/terms'>Terminos y condiciones</a>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <a href='/information/policy'>Politica de privacidad</a>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <a href='/information/cookies'>Politica de cookies</a>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <a target="_blank" rel="noopener noreferrer" href='https://github.com/DavidZzzarta/K-Feedback'>GitHub</a>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <a target="_blank" rel="noopener noreferrer" href="mailto:jhottfriend@gmail.com?subject=[Bug]">Contacto</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </footer>
+      <section id='top'class="hero is-small"></section>
+  <script>
+    const version = document.querySelector('#version')
+
+fetch('/version')
+    .then(r => r.text())
+    .then(response => {
+                version.textContent = `v${response}`
+              })
+  </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+    "name": "Zohora",
+    "short_name": "Zohora",
+    "start_url": "/",
+    "description": "Gestiona tus gastos con Zohora",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#d50045"
+  }

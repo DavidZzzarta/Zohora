@@ -1,0 +1,148 @@
+<%- include('header'); -%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+<div class="container is-max-tablet">
+    <section class="section is-medium"> <br />
+        <div class="box">
+            <div class="content">
+                <p class="title is-3">Codigo de verificacion</p>
+                <hr class="bd-hr">
+                <p>Para terminar el proceso, coloca el codigo de verificacion que llego al correo, revisa en spam</p>
+                <form id="form-otp">
+                    <div class="field">
+                        <div class="control">
+                            <div class="columns is-mobile">
+                                <div class="column">
+                                    <input style='text-align:center' id='first-otp' class="input is-large" type="text" pattern="\d*" maxlength="1" placeholder='*' />
+                                </div>
+                                <div class="column">
+                                    <input style='text-align:center' id='second-otp' class="input is-large" type="text" pattern="\d*" maxlength="1" placeholder='*' />
+                                </div>
+                                <div class="column">
+                                    <input style='text-align:center' id='third-otp' class="input is-large" type="text" pattern="\d*" maxlength="1" placeholder='*' />
+                                </div>
+                                <div class="column">
+                                    <input style='text-align:center' id='fourth-otp' class="input is-large" type="text" pattern="\d*" maxlength="1" placeholder='*' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="help">No recibiste el codigo? <a href='/'> Volver</a></p>
+                    <p id="invalid-code" class="help is-danger"></p>
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button is-primary is-medium">Verificar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script>
+    let email = new URL(window.location.href).searchParams.get('email')
+    let type = new URL(window.location.href).searchParams.get('type')
+
+    const invalidCode = document.getElementById('invalid-code')
+
+    document.addEventListener('DOMContentLoaded', () => {
+        invalidCode.textContent = ''
+        const form = document.getElementById('form-otp')
+        const inputs = [...form.querySelectorAll('input[type=text]')]
+        const submit = form.querySelector('button[type=submit]')
+
+        const handleKeyDown = (e) => {
+            if (
+                !/^[0-9]{1}$/.test(e.key)
+                && e.key !== 'Backspace'
+                && e.key !== 'Delete'
+                && e.key !== 'Tab'
+                && !e.metaKey
+            ) {
+                e.preventDefault()
+            }
+
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                const index = inputs.indexOf(e.target);
+                if (index > 0) {
+                    inputs[index - 1].value = '';
+                    inputs[index - 1].focus();
+                }
+            }
+        }
+
+        const handleInput = (e) => {
+            const { target } = e
+            const index = inputs.indexOf(target)
+            if (target.value) {
+                if (index < inputs.length - 1) {
+                    inputs[index + 1].focus()
+                } else {
+                    submit.focus()
+                }
+            }
+        }
+
+        const handleFocus = (e) => {
+            e.target.select()
+        }
+
+        const handlePaste = (e) => {
+            e.preventDefault()
+            const text = e.clipboardData.getData('text')
+            if (!new RegExp(`^[0-9]{${inputs.length}}$`).test(text)) {
+                //invalidCode.textContent = ''
+                return
+            }
+            const digits = text.split('')
+            inputs.forEach((input, index) => input.value = digits[index])
+            submit.focus()
+        }
+
+        inputs.forEach((input) => {
+            input.addEventListener('input', handleInput)
+            input.addEventListener('keydown', handleKeyDown)
+            input.addEventListener('focus', handleFocus)
+            input.addEventListener('paste', handlePaste)
+        })
+
+        form?.addEventListener('submit', e => {
+            e.preventDefault()
+            let fo = document.getElementById('first-otp').value
+            let so = document.getElementById('second-otp').value
+            let to = document.getElementById('third-otp').value
+            let fto = document.getElementById('fourth-otp').value
+            let otp = fo + so + to + fto
+            if (otp.length <= 3) {
+                invalidCode.textContent = 'Faltan algunos digitos'
+                return
+            }
+
+            let body = {
+                code: otp,
+                email: email,
+                type
+            }
+
+            let method = type === 'create' ? 'POST' : type === 'delete' ? 'DELETE' : 'PATCH'
+            let init = {
+                method,
+                body: JSON.stringify(body),
+                headers: {
+                'Content-Type': 'application/json'
+            }}
+            fetch('/auth/verification', init)
+                .then(r => {
+                    if (r.status === 204) window.location.href= '/'
+                    else return r.json()
+                })
+                .then(response => {
+                    if (response.error) return null
+                    else window.location.href = '/'
+                })
+                .catch(e=>console.error(e))
+        })
+    })
+</script>
+<%- include('footer'); -%>

@@ -1,0 +1,38 @@
+<%- include('header'); -%>
+<br />
+<div class='container is-max-desktop'>
+    <div id='info-content' class='content'>
+      <div class='block'>
+        <h1 id='title' class="title is-1"></h1>
+      </div>
+    </div>
+</div>
+<script>
+let type = window.location.pathname.split('/')[2] 
+function listOfInformation(container, titleTag) {
+  if (type !== 'cookies' && type !== 'terms' && type !== 'policy') return
+  fetch('/information.json')
+    .then((r) => r.json())
+    .then((response) => {
+      response.map((e) => {
+        if (e.type === type) {
+          titleTag.textContent = e.name;
+          e.content.forEach((e) => {
+            container.innerHTML += `<p class='subtitle is-4'>${e.title}</p>`;
+            container.innerHTML += `<p class='subtitle is-5'>${e.subtitle ? e.subtitle : ""}</p>`;
+            container.innerHTML += `<hr class='bd-hr'>`;
+            e.content.map((item) => {
+              container.innerHTML += `<p>${item}</p>`;
+            });
+            container.innerHTML += "<br />";
+          });
+        }
+      });
+    })
+    .catch((e) => console.error(e));
+}
+const $ = e => document.querySelector(e)
+listOfInformation($('#info-content'), $('#title'))
+</script>
+    
+<%- include('footer'); -%>

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "./backend/src/api/controllers/user.controller.ts",
+    "./backend/src/api/controllers/financial.controller.ts"
+  ],
+  "out": "docs",
+  "projectDocuments": ["README.md", "DOCS.md"],
+  "plugin": ["typedoc-material-theme"],
+  "themeColor": "#cb9820",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "skipErrorChecking": true,
+  "tsconfig": "./backend/tsconfig.json"
+} 

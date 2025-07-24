@@ -1,0 +1,12 @@
+packages:
+  - backend
+  - frontend
+
+catalog:
+  turbo: ^2.5.5
+
+onlyBuiltDependencies:
+  - '@scarf/scarf'
+  - bcrypt
+  - esbuild
+  - re2

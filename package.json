@@ -1,0 +1,39 @@
+{
+  "name": "Zohora",
+  "version": "1.0.0",
+  "aliases": {
+    "@src": "backend/build"
+  },
+  "scripts": {
+    "docs:build": "typedoc --entryPoints ./backend/src/api/controllers/*.ts ./backend/src/api/services/*.ts ./backend/src/core/utils/**/*.ts ./backend/src/core/types/*.ts --out ./docs --plugin typedoc-material-theme --themeColor '#cb9820' --skipErrorChecking --excludePrivate --excludeProtected --excludeExternals --readme README.md --projectDocuments API_DOCS.md --includeVersion --name 'Zohora API Documentation'",
+    "docs:serve": "servor ./docs",
+    "test": "turbo run test",
+    "test:watch": "turbo run test --watch",
+    "test:coverage": "turbo run test --coverage",
+    "format": "turbo run format",
+    "build": "turbo run build",
+    "start": "node --loader esm-module-alias/loader --no-warnings backend/build/core/server.js",
+    "dev": "turbo run dev",
+    "pre-commit": "pnpm format",
+    "prepare": "husky",
+    "knip": "knip"
+  },
+  "author": "David Zarta",
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=22.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.5",
+    "husky": "^9.1.7",
+    "knip": "^5.62.0",
+    "servor": "^4.0.2",
+    "turbo": "catalog:",
+    "typedoc": "^0.28.7",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "esm-module-alias": "^2.2.1"
+  }
+}

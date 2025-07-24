@@ -1,0 +1,32 @@
+<%- include('header'); -%>
+<section class="section is-large">
+<div class="container is-max-desktop">
+				<div class="content">
+          <nav class="level">
+            <div class="level-item">
+					<p class="image has-text-centered" id='meme'><img class='meme'src="/404.jpeg" alt='not found'/></p>
+            </div>
+            <div class="level-item cont">
+              <div>
+					<h1 class="title is-1">Error 404</h1>
+					<p class="subtitle"> ¡Ooops! Parece que esta página <strong id='current-link'></strong> o recurso no existe.</p>
+      <hr class="bd-hr">
+					<a href='/' class="button is-primary is-medium">
+            <span class="icon">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path stroke="var(--fourth-color)" d="M1 6V15H6V11C6 9.89543 6.89543 9 8 9C9.10457 9 10 9.89543 10 11V15H15V6L8 0L1 6Z" fill="var(--fourth-color)"></path> </g></svg>
+            </span>
+            <span>Volver</span>
+					</a>
+            </div>
+            </div>
+          </nav>
+        </div>
+</div>
+</section>
+  <br />
+
+  <script>
+    document.querySelector('#current-link').textContent = window.location.pathname
+  </script>
+    
+<%- include('footer'); -%>
