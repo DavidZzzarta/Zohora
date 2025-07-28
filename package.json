@@ -1,5 +1,5 @@
 {
-  "name": "Zohora",
+  "name": "zohora",
   "version": "1.0.0",
   "aliases": {
     "@src": "backend/build"
@@ -15,7 +15,7 @@
     "start": "node --loader esm-module-alias/loader --no-warnings backend/build/core/server.js",
     "dev": "turbo run dev",
     "pre-commit": "pnpm format",
-    "prepare": "husky",
+    "prepare": "husky install",
     "knip": "knip"
   },
   "author": "David Zarta",

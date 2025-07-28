@@ -25,6 +25,11 @@ export async function connect(): Promise<void> {
       maxRetriesPerRequest: null
     })
     connected = true
+    connection.on('error', (error: Error) => {
+      connected = false
+      Logger.error(`Error connecting to redis: ${error.message}`)
+      process.exit(1)
+    })
     Logger.log('Connected with redis succesful')
   } catch (error) {
     Logger.error('Failed to connect to redis. Exiting with exit status code 1.')

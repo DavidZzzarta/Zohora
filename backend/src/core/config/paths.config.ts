@@ -10,6 +10,14 @@ class Paths {
   public static readonly frontend = join(rootPath, 'frontend', 'build')
   public static readonly views = join(rootPath, 'backend', 'src', 'views')
   public static readonly mainPackage = join(rootPath, 'package.json')
+  public static readonly envExample = join(
+    rootPath,
+    'backend',
+    'src',
+    'core',
+    'config',
+    '.env.example'
+  )
   public static readonly env = join(
     rootPath,
     'backend',

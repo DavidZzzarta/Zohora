@@ -5,9 +5,15 @@ import express from 'express'
 import Paths from '@src/core/config/paths.config.js'
 import fs from 'node:fs'
 
-// .env file path
+// .env file path settings
 if (Paths.env && fs.existsSync(Paths.env)) {
+  Logger.log('Loading .env file')
   process.loadEnvFile(Paths.env)
+} else if (process.env.NODE_ENV === 'production') {
+  Logger.log('Loading environment variables from production')
+} else {
+  Logger.log('Loading environment variables from test')
+  process.loadEnvFile(Paths.envExample)
 }
 
 /**
@@ -36,7 +42,7 @@ const envSchema = z.object({
   PG_HOST: z.string().default('localhost'),
   PG_USER: z.string().default('postgres'),
   PG_PORT: z.coerce.number().int().positive().default(5432),
-  SALT_ROUNDS: z.number().int().positive().default(10),
+  SALT_ROUNDS: z.coerce.number().int().positive().default(10),
   PORT: z.coerce.number().int().positive().default(8080),
   NODE_ENV: z
     .enum(['development', 'production', 'test'])
@@ -54,9 +60,6 @@ const env: Record<string, any> = process.env
 const { success, error, data } = envSchema.safeParse(env)
 if (!success) {
   Logger.error(`Error en las variables de entorno: ${error}`)
-  Logger.error(
-    `Formateo del error en las variables de entorno: ${error.format()}`
-  )
   process.exit(1)
 }
 
