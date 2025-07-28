@@ -1,8 +1,11 @@
 import { defineConfig } from 'vitest/config'
-import { resolve } from 'node:path'
 
-const root = resolve(process.cwd() + '/build/')
-console.log(root)
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const root = join(__dirname, 'build')
 
 export default defineConfig({
   test: {
