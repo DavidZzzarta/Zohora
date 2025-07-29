@@ -1,7 +1,6 @@
 import process from 'node:process'
 import { z } from 'zod'
 import { Logger } from '@src/api/middlewares/logger/access.logger.js'
-import express from 'express'
 import Paths from '@src/core/config/paths.config.js'
 import fs from 'node:fs'
 
