@@ -17,22 +17,6 @@ if (Paths.env && fs.existsSync(Paths.env)) {
 }
 
 /**
- * Configuration of public (static) files
- */
-export const publicFilesConfig = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['css', 'js'],
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: (res: express.Response, filePath: string) => {
-    if (filePath.endsWith('.webmanifest')) {
-      res.setHeader('Content-Type', 'application/manifest+json')
-    }
-  }
-}
-
-/**
  * Environment variable validation scheme using Zod
  */
 const envSchema = z.object({
