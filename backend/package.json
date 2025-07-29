@@ -39,6 +39,7 @@
     "@types/passport-google-oauth20": "^2.0.16",
     "@types/safe-regex": "^1.1.6",
     "@types/yosay": "^2.0.3",
+    "@vitest/coverage-v8": "^3.2.4",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
     "supertest": "^7.1.4",
